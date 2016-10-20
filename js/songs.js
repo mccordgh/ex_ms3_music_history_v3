@@ -206,9 +206,11 @@ function addButtonClick(e) {
 	} else {
 
 		addSongToPlaylist(songObj);
-		contentOptions.classList.remove("hidden");
-		contentPlaylist.classList.remove("hidden");
-		addMusicView.classList.add("hidden");
+		txtSong.value = "";
+		txtArtist.value = "";
+		txtAlbum.value = "";
+		txtGenre.value = "";
+
 		alert("Song added! " + songObj.artist + " :: " + songObj.album + " :: " + songObj.song);
 	}
 	
