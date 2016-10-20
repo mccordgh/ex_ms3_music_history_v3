@@ -11,166 +11,69 @@
 
 	<div class="wrapper">
 		
-		<div id="content_nav">
+			<div id="content_nav">
+				
+				<ul>
+					<li>
+						<a id="list_music_anchor">List Music</a> <b>|</b>
+					</li>
+					<li>
+						<a id="add_music_anchor">Add Music</a> <b>|</b>
+					</li>
+				</ul>
 			
-			<ul>
-				<li>
-					<a href="#">View Music</a> <b>|</b>
-				</li>
-				<li>
-					<a href="#">Add Music</a> <b>|</b>
-				</li>
-				<li>
-					<a href="#">Profile</a>
-				</li>
-			</ul>
-		
-		</div>
-		
-		<div id="content_options">
+			</div>
+
+		<div id="add_music_view">
 			<form>
-				<p>Song length:</p>
-					<input type="range" min="0" max="100" value="50">
-				<p>Artist:</p>
-					<select name="artist-choice" class="choice_box" id="artistChoice">
-<!-- 						<option value="diiv">DIIV</option>
-						<option value="joyDivision">Joy Division</option>
-						<option value="theChurch">The Church</option>
-						<option value="wildNothing">Wild Nothing</option>
-						<option value="devo">DEVO</option>
- -->					</select>
-				<p>Album:</p>
-					<select name="album-choice" class="choice_box" id="albumChoice">
-<!-- 						<option value="oshin">Oshin</option>
-						<option value="unknownPleasures">Unknown Pleasures</option>
-						<option value="starfish">Starfish</option>
-						<option value="nocturne">Nocturne</option>
-						<option value="freedomOfChoice">Freedom of Choice</option>
- -->					</select>
-				<p id="genre_name">Genre:</p>
-					<table class="radio_options">
-						<tr>
-							<td><input type="radio" name="genre_rock" value="rock"> Rock</td>
-							<td><input type="radio" name="genre_classical" value="classical"> Classical</td>
-						</tr>
-						<tr>
-							<td><input type="radio" name="genre_pop" value="pop"> Pop</td>
-							<td><input type="radio" name="genre_jazz" value="jazz"> Jazz</td>
-						</tr>
-						<tr>
-							<td><input type="radio" name="genre_blues" value="blues"> Blues</td>
-							<td><input type="radio" name="genre_hipHop" value="hipHop"> Hip Hop</td>
-						</tr>
-					</table>
-				<p>						
-					<input type="submit" value="Filter" id="filter_button" align="middle">
-				</p>
-			</form>
+				Song Name: <input type="text" id="txtSong">
+				Artist: <input type="text" id="txtArtist">
+				Album: <input type="text" id="txtAlbum">	
+				Genre: <input type="text" id="txtGenre">	
+			</form>		
+			<button type="button" id="btnAdd" class="myButton" align="middle">Add Music</button>
+
 		</div>
+
+		<div class="list_music_view">
+
+			
+			<div id="content_options" class="hidden">
+				<form>
+					<p>Song length:</p>
+						<input type="range" min="0" max="100" value="50">
+					<p>Artist:</p>
+						<select name="artist-choice" class="choice_box" id="artistChoice">
+	 					</select>
+					<p>Album:</p>
+						<select name="album-choice" class="choice_box" id="albumChoice">
+						</select>
+					<p id="genre_name">Genre:</p>
+						<table class="radio_options">
+							<tr>
+								<td><input type="radio" name="genre" value="genre"> Rock</td>
+								<td><input type="radio" name="genre" value="genre"> Classical</td>
+							</tr>
+							<tr>
+								<td><input type="radio" name="genre" value="genre"> Pop</td>
+								<td><input type="radio" name="genre" value="genre"> Jazz</td>
+							</tr>
+							<tr>
+								<td><input type="radio" name="genre" value="genre"> Blues</td>
+								<td><input type="radio" name="genre" value="genre"> Hip Hop</td>
+							</tr>
+						</table>
+					<p>						
+						<button type="button" id="filter_button" class="myButton" align="middle">Filter</button>
+					</p>
+				</form>
+			</div>
+			
+			<div id="content_playlist" class="hidden">
+
+			</div>
 		
-		<div id="content_playlist">
-<!-- 			<p>
-				<h1>(Druun)</h1>
-				<ul id="song_options">
-					<li>
-						DIIV
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Oshin
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Genre: Rock</a>
-					</li>
-				</ul>
-			</p>
-			<p>
-				<h1>Interzone</h1>
-				<ul id="song_options">
-					<li>
-						Joy Division
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Unknown Pleasures
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Genre: Rock</a>
-					</li>
-				</ul>
-			</p>
-			<p>
-				<h1>Under the Milky Way</h1>
-				<ul id="song_options">
-					<li>
-						The Church
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Starfish
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Genre: Rock</a>
-					</li>
-				</ul>
-			</p>
-			<p>
-				<h1>Only Heather</h1>
-				<ul id="song_options">
-					<li>
-						Wild Nothing
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Nocturne
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Genre: Rock</a>
-					</li>
-				</ul>
-			</p>
-			<p>
-				<h1>Gates of Steel</h1>
-				<ul id="song_options">
-					<li>
-						DEVO
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Freedom of Choice
-					</li>
-					<li>
-						<b>|</b>
-					</li>
-					<li>
-						Genre: Rock</a>
-					</li>
-				</ul>
-			</p> -->
 		</div>
-	
 	</div>
 	<script src="js/songs.js"></script>
 </body>
