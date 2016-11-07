@@ -1,15 +1,17 @@
-var listAnchor = document.getElementById("list_music_anchor");
-var addAnchor = document.getElementById("add_music_anchor");
-var contentNav = document.getElementById("content_nav");
-var contentOptions = document.getElementById("content_options");
-var contentPlaylist = document.getElementById("content_playlist");
-var addMusicView = document.getElementById("add_music_view");
-var txtSong = document.getElementById("txtSong");
-var txtArtist = document.getElementById("txtArtist");
-var txtAlbum = document.getElementById("txtAlbum");
-var txtGenre = document.getElementById("txtGenre");
-var btnAdd = document.getElementById("btnAdd");
-var playList = document.getElementById("content_playlist");
+var listAnchor = $("#list_music_anchor")[0];
+var addAnchor = $("#add_music_anchor")[0];
+var contentNav = $("#content_nav")[0];
+var contentOptions = $("#content_options")[0];
+var contentPlaylist = $("#content_playlist")[0];
+var addMusicView = $("#add_music_view")[0];
+var txtSong = $("#txtSong")[0];
+var txtArtist = $("#txtArtist")[0];
+var txtAlbum = $("#txtAlbum")[0];
+var txtGenre = $("#txtGenre")[0];
+var btnAdd = $("#btnAdd")[0];
+var playList = $("#content_playlist")[0];
+var artistChoice = $("#artistChoice")[0];
+var albumChoice = $("#albumChoice")[0];
 
 var songs = [];
 var songData = {};
@@ -17,24 +19,20 @@ var playlistNum = "";
 var allLoaded = false;
 var lastID = -1;
 
-var loader = new XMLHttpRequest();
-loader.open("GET", "data/songs.json");
-loader.send();
-loader.addEventListener("load", function(event) {
-	var songArr = JSON.parse(loader.responseText);
-	loadSongs(songArr.songs);
-});
+$.ajax({url: "data/songs.json", success: function(result){
+	loadSongs(result.songs);
+}});
 
 listAnchor.classList.add("currentLink", "nav_link");
 addAnchor.classList.add("activeLink", "nav_link");
 listAnchor.setAttribute("href", "#");
 addAnchor.setAttribute("href", "#");
 
-addAnchor.addEventListener("click", handleNavClick);
-listAnchor.addEventListener("click", handleNavClick);
-btnAdd.addEventListener("click", addButtonClick);
-addMusicView.addEventListener("keydown", handleKeyDown);
-playList.addEventListener("click", handlePlaylistClick);
+$("#add_music_anchor").click(handleNavClick);
+$("#list_music_anchor").click(handleNavClick);
+$('#btnAdd').click(addButtonClick);
+$('#add_music_view').keydown(handleKeyDown);
+$('#content_playlist').click(handlePlaylistClick);
 
 function loadSongs(songs) {
 	for ( i = 0; i < songs.length; i++) {
@@ -46,7 +44,7 @@ function loadSongs(songs) {
 
 function handleNavClick () {
 
-	var linkGroup = document.getElementsByClassName("nav_link");
+	let linkGroup = $(".nav_link");
 
 	for (i=0;i < linkGroup.length;i++) {
 		
@@ -62,13 +60,13 @@ function handleNavClick () {
 		}
 	}
 
-	if (event.target.innerHTML === "Add Music"){
+	if ($(event.target).html() === "Add Music"){
 		
 		contentOptions.classList.add("hidden");
 		contentPlaylist.classList.add("hidden");
 		addMusicView.classList.remove("hidden");
 
-	} else if (event.target.innerHTML === "List Music") {
+	} else if ($(event.target).html() === "List Music") {
 		
 		contentOptions.classList.remove("hidden");
 		contentPlaylist.classList.remove("hidden");
@@ -76,7 +74,7 @@ function handleNavClick () {
 
 	} else {
 	
-		console.log("something went wrong -> event target innerHTML =" + event.target.innerHTML);
+		console.log("something went wrong -> :(");
 	
 	}
 
@@ -84,25 +82,22 @@ function handleNavClick () {
 
 function addSongToPlaylist (songObj, i) {
 
-	var song = songObj.song;
+	let song = songObj.song;
+	let artist = songObj.artist;
+	let album = songObj.album;
+	let genre = songObj.genre;
 
-	var artist = songObj.artist;
-	var album = songObj.album;
-	var genre = songObj.genre;
-
-	var artistChoice = document.getElementById("artistChoice");
-	var optn = document.createElement("OPTION");
+	let optn = document.createElement("OPTION");
 	optn.text = artist;
 	optn.value = artist;
 	artistChoice.options.add(optn);
 
-	var albumChoice = document.getElementById("albumChoice");
-	var optn2 = document.createElement("OPTION");
+	let optn2 = document.createElement("OPTION");
 	optn2.text = album;
 	optn2.value = album;
 	albumChoice.options.add(optn2);
 
-	var ulDiv = document.createElement("DIV");
+	let ulDiv = document.createElement("DIV");
 	ulDiv.id = "ulDiv" + i;
 	ulDiv.classList.add("songDiv");
 
@@ -115,8 +110,8 @@ function addSongToPlaylist (songObj, i) {
 	album = "<li>" + album + "</li>";
 	genre = "<li>Genre: " + genre + "</li>";
 	delButton = "<li><button type='button' id='" + i + "' class='btnDelete'>Delete</button></li>";
-	ulDiv.innerHTML += "<p>" + song + newUL + artist + pipeLI + album + pipeLI + genre + delButton + "</ul></p><hr>";
 	playList.appendChild(ulDiv);
+	$('#ulDiv' + i).html("<p>" + song + newUL + artist + pipeLI + album + pipeLI + genre + delButton + "</ul></p><hr>");
 
 }
 
@@ -128,7 +123,7 @@ function handleKeyDown (e) {
 }
 
 function addButtonClick(e) {
-	var songObj = { song: txtSong.value, artist: txtArtist.value, album: txtAlbum.value, genre: txtGenre.value };
+	let songObj = { song: txtSong.value, artist: txtArtist.value, album: txtAlbum.value, genre: txtGenre.value };
 
 	if (songObj.song === "") {
 		alert("Please enter a song name!");
@@ -153,35 +148,31 @@ function addButtonClick(e) {
 }
 
 function handlePlaylistClick() {
-	var clicked = event.target;
-	var clickedID = clicked.id;
+	let clicked = event.target;
+	let clickedID = parseInt(clicked.id);
+
 	if (clicked.type === "button") {
 
-		if (clicked.innerHTML === "Delete"){
+		if ($(clicked).html() === "Delete"){
 			lastID--;
-			console.log("lastID", lastID);
-			var btnIndex = clickedID;
-			console.log("btnIndex", btnIndex);
-			var removeDiv = document.getElementById("ulDiv" + btnIndex);
-			console.log("removeDiv", removeDiv);
+			let btnIndex = clickedID;
+			let removeDiv = $("#ulDiv" + btnIndex)[0];
 			playList.removeChild(removeDiv);
 			songs.splice(btnIndex, 1);
-			artistChoice.remove(clickedID);
-			albumChoice.remove(clickedID);
+			artistChoice.remove(clickedID + 1);
+			albumChoice.remove(clickedID + 1);
 			updateIDs();
 
-		} else if (clickedID === "btnMore") {
+		} else if ($(clicked).html() === "More Music &gt;&gt;&gt;") {
 			
 			if (allLoaded === true) {
 				alert("All songs have been loaded!!");
 			} else {
-				var loader = new XMLHttpRequest();
-				loader.open("GET", "data/songs2.json");
-				loader.send();
-				loader.addEventListener("load", function(event) {
-					var songArr = JSON.parse(loader.responseText);
-					loadSongs(songArr.songs);
-					});
+
+				$.ajax({url: "data/songs2.json", success: function(result){
+					loadSongs(result.songs);
+        }});
+        
 				removeMoreButton();
 				allLoaded = true;
 			}
@@ -190,33 +181,28 @@ function handlePlaylistClick() {
 }
 
 function updateIDs() {
-	var songDivs = document.getElementsByClassName("songDiv");
-	var delButtons = document.getElementsByClassName("btnDelete");
-	console.log("delButtons", delButtons);
-	console.log("songDivs", songDivs);
-	console.log("songs", songs);
+	let songDivs = $(".songDiv");
+	let delButtons = $(".btnDelete");
 	songs.forEach( function(item, index) {
-		console.log("songDivs[index]", songDivs[index]);
-		console.log("index", index);
 		songDivs[index].id = "ulDiv" + index;
 		delButtons[index].id = index;
 	});
 }
 
 function appendMoreButton() {
-	var moreButton = document.createElement("BUTTON");
-	var moreDiv = document.createElement("DIV");
+	let moreButton = document.createElement("BUTTON");
+	let moreDiv = document.createElement("DIV");
 	moreDiv.id = "moreDiv";
 	moreButton.type = "button";
 	moreButton.id = "btnMore";
-	moreButton.innerHTML = "More Music >>>";
 	playList.appendChild(moreDiv);
 	moreDiv.appendChild(moreButton);
+	$('#btnMore').html("More Music >>>");
 
 }
 
 function removeMoreButton() {
-	var moreDiv = document.getElementById("moreDiv");
+	let moreDiv = $("#moreDiv")[0];
 	playList.removeChild(moreDiv);
 
 }
