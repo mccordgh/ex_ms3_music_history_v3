@@ -1,19 +1,28 @@
 {
-  "songs": [
+  "songs" : [
     {
-      "title": "The Walk",
-      "artist": "Mayer Hawthorne",
-      "album": "How Do You Do"
+      "artist": "The Church",
+      "album": "Starfish", 
+      "song": "Under the Milky Way",
+      "genre": "Acoustic"
     },
-    {
-      "title": "Monkey Biz",
-      "artist": "The Coconuts",
-      "album": "My My My"
+    { 
+      "artist": "ZZ Top", 
+      "album": "Eliminator", 
+      "song": "Legs", 
+      "genre": "Rock"
     },
-    {
-      "title": "Howdy Doodie",
-      "artist": "My Mom",
-      "album": "It's songs n Stuff"
+    { 
+      "artist": "Supertramp", 
+      "album": "Breakfast in America", 
+      "song": "The Logical Song", 
+      "genre": "Rock" 
+    },
+    { 
+      "artist": "Pink Floyd", 
+      "album": "The Wall", 
+      "song": "Another Brick in the Wall", 
+      "genre": "Rock" 
     }
   ]
 }
