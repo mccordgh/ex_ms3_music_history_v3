@@ -1,56 +1,3 @@
-// console.log("First line in JS file");
-// console.log(Date.now()); //time stamp when page loads
-
-// function executeThisIfXHRFails(xhrEvent) {
-//   console.log("An error occured while transferring the data");
-// }
-
-// function executeThisCodeAfterFileIsLoaded() {
-//   console.log("this", this );
-//   console.log("execute this code after file is loaded");
-//   console.log( Date.now() );
-
-//   // parse the response text as JSON. Turns string of characters into a JS object
-//   // (observe that JSON keys are strings, which is not how a JS object is formatted)
-//   var data = JSON.parse(this.responseText); // 'this' is the XMLHttpRequest
-//   console.log("data", data );
-
-//   var songList = document.getElementById("all-my-songs");
-
-//   for( currentSong in data.songs ) {
-//     var songData = '';
-//     var song = data.songs[currentSong]
-//     songData += "<div class='song-block'>";
-//     songData += `<h1>${song.title}</h1>`;
-//     songData += "<div class='artist'>Performed by ";
-//     songData += song.artist;
-//     songData += "</div>";
-//     songData += "<div class='album'>On the album ";
-//     songData += song.album;
-//     songData += "</div>";
-//     songData += "</div>";
-
-//     songList.innerHTML += songData;
-//   }
-// }
-
-// var myRequest = new XMLHttpRequest();
-
-// // The event listener listens for the load event, THEN runs.
-// // This is asynchronous and acts as a callback.
-// // The functions are not called until after the event happens.
-// myRequest.addEventListener("load", executeThisCodeAfterFileIsLoaded);
-// myRequest.addEventListener("error", executeThisIfXHRFails);
-
-// // open tells it what to do with one of the HTTP verbs (GET, POST, PUT, DELETE)
-// myRequest.open("GET", "data/songs.json");
-// // starts the process. It means go
-// myRequest.send();
-
-// console.log("Last line in JS file");
-// console.log(Date.now()); //time stamp when page ends
-
-
 var listAnchor = document.getElementById("list_music_anchor");
 var addAnchor = document.getElementById("add_music_anchor");
 var contentNav = document.getElementById("content_nav");
@@ -64,58 +11,37 @@ var txtGenre = document.getElementById("txtGenre");
 var btnAdd = document.getElementById("btnAdd");
 var playList = document.getElementById("content_playlist");
 
-addAnchor.classList.add("currentLink", "nav_link");
-listAnchor.classList.add("activeLink", "nav_link");
-addAnchor.setAttribute("href", "#");
+var songs = [];
+var songData = {};
+var playlistNum = "";
+var allLoaded = false;
+var lastID = -1;
+
+var loader = new XMLHttpRequest();
+loader.open("GET", "data/songs.json");
+loader.send();
+loader.addEventListener("load", function(event) {
+	var songArr = JSON.parse(loader.responseText);
+	loadSongs(songArr.songs);
+});
+
+listAnchor.classList.add("currentLink", "nav_link");
+addAnchor.classList.add("activeLink", "nav_link");
 listAnchor.setAttribute("href", "#");
+addAnchor.setAttribute("href", "#");
 
 addAnchor.addEventListener("click", handleNavClick);
 listAnchor.addEventListener("click", handleNavClick);
 btnAdd.addEventListener("click", addButtonClick);
 addMusicView.addEventListener("keydown", handleKeyDown);
+playList.addEventListener("click", handlePlaylistClick);
 
-var songs = [];
-var songData = {};
-
-var person = {
-    firstName:"John",
-    lastName:"Doe",
-    age:50,
-    eyeColor:"blue"
-};
-
-songData = { artist: "The Church", album: "Starfish", song: "Under the Milky Way", genre: "Acoustic"};
-songs.push(songData);
-songData = { artist: "ZZ Top", album: "Eliminator", song: "Legs", genre: "Rock"};
-songs.push(songData);
-songData = { artist: "Supertramp", album: "Breakfast in America", song: "The Logical Song", genre: "Rock" };
-songs.push(songData);
-songData = { artist: "Pink Floyd", album: "The Wall", song: "Another Brick in the Wall", genre: "Rock" };
-songs.push(songData);
-songData = { artist: "Guns & Roses", album: "Appetite for Destruction", song: "Welcome to the Jungle", genre: "Rock" };
-songs.push(songData);
-songData = { artist: "Alanis Morisette", album: "Jagged Little Pill", song: "Ironic", genre: "Rock" };
-songs.push(songData);
-songData = { artist: "DEVO", album: "Freedom of Choice", song: "Gate of Steel", genre: "Rock"};
-songs.push(songData);
-
-
-for ( i = 0; i < songs.length; i++) {
-		
-	addSongToPlaylist(songs[i]);
-	
-}
-
-// FUNCTIONS 
-
-function formatStr (editString) {
-
-	editString = editString.replace(/>/gi, "-");
-	editString = editString.replace(/\*/gi, "");
-	editString = editString.replace(/@/gi, "");
-	editString = editString.replace(/!/gi, "");
-	
-	return editString;
+function loadSongs(songs) {
+	for ( i = 0; i < songs.length; i++) {
+		lastID++;
+		addSongToPlaylist(songs[i], lastID);
+	}
+	appendMoreButton();
 }
 
 function handleNavClick () {
@@ -156,7 +82,7 @@ function handleNavClick () {
 
 }
 
-function addSongToPlaylist (songObj) {
+function addSongToPlaylist (songObj, i) {
 
 	var song = songObj.song;
 
@@ -171,19 +97,26 @@ function addSongToPlaylist (songObj) {
 	artistChoice.options.add(optn);
 
 	var albumChoice = document.getElementById("albumChoice");
-	var optn = document.createElement("OPTION");
-	optn.text = album;
-	optn.value = album;
-	albumChoice.options.add(optn);
+	var optn2 = document.createElement("OPTION");
+	optn2.text = album;
+	optn2.value = album;
+	albumChoice.options.add(optn2);
+
+	var ulDiv = document.createElement("DIV");
+	ulDiv.id = "ulDiv" + i;
+	ulDiv.classList.add("songDiv");
+
+	songs.push ({song, artist, album, genre});
 
 	song = "<h1>" + song + "</h1>";
 	newUL = "<ul id='song_options'>";
 	artist = "<li>" + artist + "</li>";
-	pipeLI = "<li><b>|</b></li>"
+	pipeLI = "<li><b>|</b></li>";
 	album = "<li>" + album + "</li>";
 	genre = "<li>Genre: " + genre + "</li>";
-
-	playList.innerHTML += "<p>" + song + newUL + artist + pipeLI + album + pipeLI + genre + "</ul></p>";
+	delButton = "<li><button type='button' id='" + i + "' class='btnDelete'>Delete</button></li>";
+	ulDiv.innerHTML += "<p>" + song + newUL + artist + pipeLI + album + pipeLI + genre + delButton + "</ul></p><hr>";
+	playList.appendChild(ulDiv);
 
 }
 
@@ -205,13 +138,85 @@ function addButtonClick(e) {
 		alert("Please enter an album name!");
 	} else {
 
-		addSongToPlaylist(songObj);
+		removeMoreButton();
+		lastID++;
+		addSongToPlaylist(songObj, lastID);
 		txtSong.value = "";
 		txtArtist.value = "";
 		txtAlbum.value = "";
 		txtGenre.value = "";
+		appendMoreButton();
 
 		alert("Song added! " + songObj.artist + " :: " + songObj.album + " :: " + songObj.song);
 	}
 	
+}
+
+function handlePlaylistClick() {
+	var clicked = event.target;
+	var clickedID = clicked.id;
+	if (clicked.type === "button") {
+
+		if (clicked.innerHTML === "Delete"){
+			lastID--;
+			console.log("lastID", lastID);
+			var btnIndex = clickedID;
+			console.log("btnIndex", btnIndex);
+			var removeDiv = document.getElementById("ulDiv" + btnIndex);
+			console.log("removeDiv", removeDiv);
+			playList.removeChild(removeDiv);
+			songs.splice(btnIndex, 1);
+			artistChoice.remove(clickedID);
+			albumChoice.remove(clickedID);
+			updateIDs();
+
+		} else if (clickedID === "btnMore") {
+			
+			if (allLoaded === true) {
+				alert("All songs have been loaded!!");
+			} else {
+				var loader = new XMLHttpRequest();
+				loader.open("GET", "data/songs2.json");
+				loader.send();
+				loader.addEventListener("load", function(event) {
+					var songArr = JSON.parse(loader.responseText);
+					loadSongs(songArr.songs);
+					});
+				removeMoreButton();
+				allLoaded = true;
+			}
+		}
+	}
+}
+
+function updateIDs() {
+	var songDivs = document.getElementsByClassName("songDiv");
+	var delButtons = document.getElementsByClassName("btnDelete");
+	console.log("delButtons", delButtons);
+	console.log("songDivs", songDivs);
+	console.log("songs", songs);
+	songs.forEach( function(item, index) {
+		console.log("songDivs[index]", songDivs[index]);
+		console.log("index", index);
+		songDivs[index].id = "ulDiv" + index;
+		delButtons[index].id = index;
+	});
+}
+
+function appendMoreButton() {
+	var moreButton = document.createElement("BUTTON");
+	var moreDiv = document.createElement("DIV");
+	moreDiv.id = "moreDiv";
+	moreButton.type = "button";
+	moreButton.id = "btnMore";
+	moreButton.innerHTML = "More Music >>>";
+	playList.appendChild(moreDiv);
+	moreDiv.appendChild(moreButton);
+
+}
+
+function removeMoreButton() {
+	var moreDiv = document.getElementById("moreDiv");
+	playList.removeChild(moreDiv);
+
 }
