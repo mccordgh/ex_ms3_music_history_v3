@@ -44,9 +44,11 @@
 						<input type="range" min="0" max="100" value="50">
 					<p>Artist:</p>
 						<select name="artist-choice" class="choice_box" id="artistChoice">
+							<option value="" disabled selected>Artist</option>
 	 					</select>
 					<p>Album:</p>
 						<select name="album-choice" class="choice_box" id="albumChoice">
+							<option value="" disabled selected>Album</option>
 						</select>
 					<p id="genre_name">Genre:</p>
 						<table class="radio_options">
@@ -75,6 +77,11 @@
 		
 		</div>
 	</div>
+	
+	<script
+  	src="https://code.jquery.com/jquery-3.1.1.min.js"
+  	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  	crossorigin="anonymous"></script>
 	<script src="js/songs.js"></script>
 </body>
 </html>
