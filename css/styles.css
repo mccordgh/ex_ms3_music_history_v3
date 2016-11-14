@@ -152,3 +152,7 @@ select {
 	padding-left: 20px;
 	margin-left: 5px;
 }
+
+#btnMore {
+	margin-bottom: 20px;
+}
