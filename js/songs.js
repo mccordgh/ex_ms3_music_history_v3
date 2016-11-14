@@ -19,9 +19,14 @@ var playlistNum = "";
 var allLoaded = false;
 var lastID = -1;
 
-$.ajax({url: "data/songs.json", success: function(result){
-	loadSongs(result.songs);
-}});
+$.ajax(
+	{
+		url: "data/songs.json", 
+		success: function(result){
+			loadSongs(result.songs);
+		}
+	}
+);
 
 listAnchor.classList.add("currentLink", "nav_link");
 addAnchor.classList.add("activeLink", "nav_link");
