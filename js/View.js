@@ -2,16 +2,9 @@
 
 let View = {
 	updateIDs() {
-		console.clear();
 		$.each( $(".songDiv"), function(index, item) {
-			console.log("index", index);
-			console.log("item", item);
-			// if (!($(item).is('.hidden'))){
-				console.log("setting " + $(item) + " id to >ulDiv" + index);
-				$(item).attr('id', `ulDiv${index}`);
-				console.log("setting " + $('.btnDelete')[index] + " id to " + index);
-				$(".btnDelete")[index].setAttribute('id', index);
-			// }
+			$(item).attr('id', `ulDiv${index}`);
+			$(".btnDelete")[index].setAttribute('id', index);
 		});
 	},	
 	addMoreButton() {
@@ -64,10 +57,7 @@ let View = {
 		let currArtist = $('artist')[index].innerHTML;
 		let currAlbum = $('album')[index].innerHTML;
 		
-		console.log("removing:");
-		console.log($('#ulDiv' + index));
 		$('#ulDiv' + index).remove();
-		console.log("ulDiv" + index + " should now be removed");
 
 		if (this.doesItExistInPlaylist('album', currAlbum) === -1) {
 			$("#albumChoice option[value='" + currAlbum + "']").remove();
