@@ -18,11 +18,23 @@
       "song": "The Logical Song", 
       "genre": "Rock" 
     },
+    {
+      "artist": "The Church",
+      "album": "Starfish", 
+      "song": "Reptile",
+      "genre": "Rock"
+    },
     { 
       "artist": "Pink Floyd", 
       "album": "The Wall", 
       "song": "Another Brick in the Wall", 
       "genre": "Rock" 
+    },
+    { 
+      "artist": "ZZ Top", 
+      "album": "Eliminator", 
+      "song": "Sharp Dressed Man", 
+      "genre": "Rock"
     }
   ]
 }

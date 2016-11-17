@@ -1,7 +1,7 @@
 {
   "songs" : [
     { 
-      "artist": "Guns & Roses", 
+      "artist": "Guns and Roses", 
       "album": "Appetite for Destruction", 
       "song": "Welcome to the Jungle", 
       "genre": "Rock" 
@@ -16,6 +16,12 @@
       "artist": "DEVO", 
       "album": "Freedom of Choice", 
       "song": "Gate of Steel", 
+      "genre": "Rock"
+    },
+    { 
+      "artist": "DEVO", 
+      "album": "Freedom of Choice", 
+      "song": "Girl U Want", 
       "genre": "Rock"
     }
   ]
