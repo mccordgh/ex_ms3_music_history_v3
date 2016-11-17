@@ -14,28 +14,23 @@
 			<div id="content_nav">
 				
 				<ul>
-					<li>
-						<a id="list_music_anchor">List Music</a> <b>|</b>
-					</li>
-					<li>
-						<a id="add_music_anchor">Add Music</a> <b>|</b>
-					</li>
+					<li id="list_music_anchor" class="list_anchor currentLink" next="list_music_view">List Music</li>
+					<li id="add_music_anchor" class="list_anchor" next="add_music_view">Add Music</li>
+					<li id="add_music_anchor" class="list_anchor" next="profile_view">Profile</li>
+					<li id="add_music_anchor" class="list_anchor" next="settings_view">Settings</li>
 				</ul>
 			
 			</div>
 
 		<div id="add_music_view" class="hidden">
-			<form>
 				Song Name: <input type="text" id="txtSong">
 				Artist: <input type="text" id="txtArtist">
 				Album: <input type="text" id="txtAlbum">	
 				Genre: <input type="text" id="txtGenre">	
-			</form>		
 			<button type="button" id="btnAdd" class="myButton" align="middle">Add Music</button>
-
 		</div>
 
-		<div class="list_music_view">
+		<div id="list_music_view">
 
 			
 			<div id="content_options">
@@ -43,12 +38,14 @@
 					<p>Song length:</p>
 						<input type="range" min="0" max="100" value="50">
 					<p>Artist:</p>
-						<select name="artist-choice" class="choice_box" id="artistChoice">
-							<option value="" disabled selected>Artist</option>
+						<select name="artist-choice" class="choice_box" id="artistChoice" filterType="artist">
+							<option value="--Show All--" selected>All Artists</option>
+							<option disabled>-------------------------------------</option>
 	 					</select>
 					<p>Album:</p>
-						<select name="album-choice" class="choice_box" id="albumChoice">
-							<option value="" disabled selected>Album</option>
+						<select name="album-choice" class="choice_box" id="albumChoice" filterType="album">
+							<option value="--Show All--" selected>All Albums</option>
+							<option disabled>-------------------------------------</option>
 						</select>
 					<p id="genre_name">Genre:</p>
 						<table class="radio_options">
@@ -76,12 +73,27 @@
 			</div>
 		
 		</div>
+	
+		<div id="profile_view" class="hidden">
+			<div style="border: 5px solid black;height:300px;width:300px">
+				<h1>PROFILE VIEW PLACE HOLDER</h1>
+			</div>
+		</div>
+		
+		<div id="settings_view" class="hidden">
+			<div style="border: 5px solid black;height:300px;width:300px">
+				<h1>SETTINGS VIEW PLACE HOLDER</h1>
+			</div>
+		</div>
+
 	</div>
+
+	<button type="button" style="height:100px;width:500px" id="songButton">GET SONGS ARRAY</button>
 	
 	<script
   	src="https://code.jquery.com/jquery-3.1.1.min.js"
   	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   	crossorigin="anonymous"></script>
-	<script src="js/songs.js"></script>
+	<script src="dist/app.js"></script>
 </body>
 </html>
