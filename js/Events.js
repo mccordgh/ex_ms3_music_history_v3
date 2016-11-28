@@ -40,25 +40,19 @@ let Events = {
 		let clicked = event.target,
 				clickedID = parseInt(clicked.id);
 
-		if (clicked.type === "button") {
-
-			switch ($(clicked).html()){
-				case 'Delete':
+			if ($(clicked).html() === 'X' && clicked.type === "button")
 					Model.removeSongFromPlaylist(clicked.id);
-					break;
-				case 'More Music &gt;&gt;&gt;&gt;':
-					if (FileData.getAllLoaded()) {
-						alert("All songs have been loaded!!");
-					} else {
-						FileData.loadFile("data/songs2.json", Model.addSongsToPlaylist);
-						FileData.setAllLoaded(true);
-					}
-					break;
-				default:
-					alert('Something went wrong. Button ' + $(clicked) + ' not found.');
+			
+			console.log(clicked.id);
+			if (clicked.id === 'btnMore' || clicked.id === 'moreDiv'){
+				if (FileData.getAllLoaded()) {
+					alert("All songs have been loaded!!");
+				} else {
+					FileData.loadFile("data/songs2.json", Model.addSongsToPlaylist);
+					FileData.setAllLoaded(true);
+				}
 			} 
 		}
-	}
-};
+	};
 
 module.exports = Events;

@@ -3,26 +3,22 @@
     { 
       "artist": "Guns and Roses", 
       "album": "Appetite for Destruction", 
-      "song": "Welcome to the Jungle", 
-      "genre": "Rock" 
+      "song": "Welcome to the Jungle"
     },
     { 
       "artist": "Alanis Morisette", 
       "album": "Jagged Little Pill", 
-      "song": "Ironic", 
-      "genre": "Rock" 
+      "song": "Ironic"
     },
     { 
       "artist": "DEVO", 
       "album": "Freedom of Choice", 
-      "song": "Gate of Steel", 
-      "genre": "Rock"
+      "song": "Gate of Steel"
     },
     { 
       "artist": "DEVO", 
       "album": "Freedom of Choice", 
-      "song": "Girl U Want", 
-      "genre": "Rock"
+      "song": "Girl U Want"
     }
   ]
 }

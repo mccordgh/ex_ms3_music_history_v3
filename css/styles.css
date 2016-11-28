@@ -1,147 +1,150 @@
 html, body, ol, div {
-  margin: 0; }
+  margin: 0;
+  padding: 0;
+  font-size: 1em; }
 
 body {
-  background-color: lightgrey; }
+  font-family: 'Montserrat', sans-serif;
+  background-color: black;
+  color: white;
+  font-size: 0.75em;
+  background-image: url("../res/laserBG.jpg"); }
 
 h1 {
-  color: #785616;
-  padding: 0;
+  color: #888;
+  font-size: 1.2em;
   margin: 5px 0 10px; }
 
-h3 {
-  display: inline-block; }
-
-a {
-  text-decoration: none;
-  color: black; }
-
 ul {
-  width: 100%;
-  padding: 0;
+  display: inline-block;
   list-style: none;
   margin: 0; }
 
-li, li artist, li album, li genre {
-  margin: 0 5px;
-  padding: 5px;
+li, li artist, li album {
   display: inline;
   font-size: 1.1em; }
 
-td {
-  padding: 5px; }
-
 p {
-  margin: 10px 0 8px; }
-
-select {
-  width: 90%; }
-
-.choice_box {
-  height: 25px;
-  font-size: 0.85em;
   margin: 5px 0; }
 
-.wrapper {
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 5px 5px #bbbbbb;
-  width: 900px;
-  margin: 30px auto;
-  padding: 20px;
-  overflow: hidden; }
+select {
+  background-color: #333;
+  color: white; }
+
+input {
+  background-color: #888;
+  color: white;
+  margin: 5px; }
+
+.choice_box {
+  font-size: 0.85em;
+  margin: 0 0 5px 0;
+  width: 100%; }
 
 .hidden {
   display: none; }
 
 .myButton {
-  background-color: lightgrey;
-  padding: 10px 50px;
-  border: 2px solid #999999;
+  background-color: black;
+  padding: 5px;
+  color: #888;
+  border: 2px solid white;
   border-radius: 8px;
-  margin: 10px 0 0 30px;
-  display: inline-block; }
+  margin: 5px;
+  display: inline-block;
+  font-size: 1em; }
+
+.myButton:hover {
+  color: white;
+  cursor: pointer; }
+
+.navButton {
+  background-color: black;
+  padding: 5px;
+  color: #888;
+  margin: 5px;
+  display: inline-block;
+  font-size: 1em; }
+
+.navButton:hover {
+  color: white;
+  cursor: pointer;
+  text-decoration: underline; }
 
 .currentLink {
   font-weight: 700;
-  color: black;
+  color: white;
   text-decoration: none;
-  border: 1px solid black;
-  background-color: white; }
+  background-color: black; }
 
-.list_anchor {
-  cursor: pointer;
-  border: 1px solid grey;
-  font-weight: 400; }
+.btnSimple {
+  background-color: black;
+  color: #888;
+  margin: 5px;
+  display: inline-block;
+  font-size: 1em;
+  border: none; }
+
+.btnSimple:hover {
+  color: white;
+  cursor: pointer; }
+
+.songDiv {
+  background-color: black;
+  border-bottom: 1px solid #333;
+  padding: 5px; }
+
+.songDiv:hover {
+  background-color: #333; }
+
+.btnDelete {
+  margin: 0; }
+
+#wrapper {
+  box-shadow: 0 0 5px 5px #333;
+  margin: 30px auto; }
+
+#playlistHeader {
+  background-color: black;
+  border-bottom: 1px solid white;
+  padding: 5px;
+  color: #888; }
 
 #content_nav {
-  background-color: #FFB4B0;
-  box-shadow: 0 0 5px 5px #bbbbbb;
-  border-radius: 5px;
-  width: 893px;
-  padding: 0;
-  margin: 0 0 20px; }
+  background-color: black;
+  text-align: center;
+  border-bottom: 1px solid #333;
+  padding: 5px;
+  margin-bottom: 15px; }
 
 #content_options {
-  background-color: #4DD7FA;
-  box-shadow: 0 0 5px 5px #bbbbbb;
+  text-align: center;
+  background-color: black;
   border-radius: 5px;
-  width: 200px;
-  height: 525px;
-  margin: 0 10px 0 0;
-  padding: 10px 0 0 25px;
   float: left; }
 
 #content_playlist {
-  background-color: #FEFAC0;
-  box-shadow: 0 0 5px 5px #bbbbbb;
-  border-radius: 5px;
-  width: 622px;
-  height: 525px;
-  margin: 0 0 0 10px;
-  padding: 10px 0 0 25px;
-  float: left;
+  height: 420px;
+  margin-bottom: 10px;
   overflow-x: hidden;
   overflow-y: scroll; }
 
-#song_options {
-  padding: 0 0 10px;
-  margin: 10px auto 0;
-  width: 100%; }
-
-#song_options li {
-  padding: 0 10px 10px; }
-
-#genre_name {
-  margin: 15px auto 10px; }
-
 #add_music_view {
-  background-color: white;
+  background-color: black;
   border-radius: 5px;
-  box-shadow: 0 0 5px 5px #bbbbbb;
-  width: 200px;
-  margin: 30px auto;
-  padding: 20px;
+  text-align: center;
   overflow: hidden; }
 
-#add_music_view button {
-  display: block;
-  background-color: lightgrey;
-  padding: 10px 50px;
-  border: 2px solid #999999;
-  border-radius: 8px;
-  margin: 10px 0 0 30px;
-  display: inline-block; }
-
 #add_music_view input {
-  height: 25px;
   font-size: 0.85em;
-  margin: 5px 0;
-  display: block;
-  padding-left: 20px;
-  margin-left: 5px; }
+  display: block; }
 
-#btnMore {
-  margin-bottom: 20px; }
+#moreDiv {
+  background-color: black;
+  text-align: center; }
+
+#moreDiv:hover {
+  background-color: #333;
+  color: white; }
 
 /*# sourceMappingURL=styles.css.map */

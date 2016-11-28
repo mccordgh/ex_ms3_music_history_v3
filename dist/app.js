@@ -60,26 +60,20 @@ let Events = {
 		let clicked = event.target,
 				clickedID = parseInt(clicked.id);
 
-		if (clicked.type === "button") {
-
-			switch ($(clicked).html()){
-				case 'Delete':
+			if ($(clicked).html() === 'X' && clicked.type === "button")
 					Model.removeSongFromPlaylist(clicked.id);
-					break;
-				case 'More Music &gt;&gt;&gt;&gt;':
-					if (FileData.getAllLoaded()) {
-						alert("All songs have been loaded!!");
-					} else {
-						FileData.loadFile("data/songs2.json", Model.addSongsToPlaylist);
-						FileData.setAllLoaded(true);
-					}
-					break;
-				default:
-					alert('Something went wrong. Button ' + $(clicked) + ' not found.');
+			
+			console.log(clicked.id);
+			if (clicked.id === 'btnMore' || clicked.id === 'moreDiv'){
+				if (FileData.getAllLoaded()) {
+					alert("All songs have been loaded!!");
+				} else {
+					FileData.loadFile("data/songs2.json", Model.addSongsToPlaylist);
+					FileData.setAllLoaded(true);
+				}
 			} 
 		}
-	}
-};
+	};
 
 module.exports = Events;
 },{"./FileData.js":3,"./Model.js":4,"./View.js":5}],3:[function(require,module,exports){
@@ -138,26 +132,21 @@ module.exports = Model;
 
 let View = {
 	updateIDs() {
-		console.clear();
 		$.each( $(".songDiv"), function(index, item) {
-			console.log("index", index);
-			console.log("item", item);
-			// if (!($(item).is('.hidden'))){
-				console.log("setting " + $(item) + " id to >ulDiv" + index);
-				$(item).attr('id', `ulDiv${index}`);
-				console.log("setting " + $('.btnDelete')[index] + " id to " + index);
-				$(".btnDelete")[index].setAttribute('id', index);
-			// }
+			$(item).attr('id', `ulDiv${index}`);
+			$(".btnDelete")[index].setAttribute('id', index);
 		});
 	},	
 	addMoreButton() {
 		$('<div/>', {
-	    id: 'moreDiv'
+	    id: 'moreDiv',
+	    class: 'col-md-12'
 		}).appendTo('#content_playlist');
 
 		$('<button/>', {
 	    type: 'button',
 	    id: 'btnMore',
+	    class: 'btnSimple',
 	    html: 'More Music >>>>'
 		}).appendTo('#moreDiv');
 	},
@@ -179,18 +168,16 @@ let View = {
 		    value: item.album
 			}).appendTo('#albumChoice');
 
-			let song = "<h1>" + item.song + "</h1>";
-			let newUL = "<ul>";
-			let artist = "<li><artist>" + item.artist + "</artist></li>";
-			let pipeLI = "<li><b>|</b></li>";
-			let album = "<li><album>" + item.album + "</album></li>";
-			let genre = "<li><genre>Genre: " + item.genre + "<genre></li>";
-			let delButton = "<li><button type='button' id='" + index + "' class='btnDelete'>Delete</button></li>";
+			let song = `<div class='col-md-4'>${item.song}</div>`;
+			let artist = `<div class='col-md-4'><artist>${item.artist}</artist></div>`;
+			let album = `<div class='col-md-3'><album>${item.album}</album></div>`;
+			// let genre = "<li><genre>Genre: " + item.genre + "<genre></li>";
+			let delButton = "<button type='button' id='" + index + "' class='btnDelete btnSimple pull-right'>X</button>";
 
 			$('<div/>', {
 		    id: 'ulDiv' + index,
-		    class: 'songDiv',
-		    html: "<p>" + song + newUL + artist + pipeLI + album + pipeLI + genre + delButton + "</ul></p><hr>"
+		    class: 'songDiv col-md-12',
+		    html: song + artist + album + delButton
 			}).appendTo('#content_playlist');
 		});
 
@@ -200,10 +187,7 @@ let View = {
 		let currArtist = $('artist')[index].innerHTML;
 		let currAlbum = $('album')[index].innerHTML;
 		
-		console.log("removing:");
-		console.log($('#ulDiv' + index));
 		$('#ulDiv' + index).remove();
-		console.log("ulDiv" + index + " should now be removed");
 
 		if (this.doesItExistInPlaylist('album', currAlbum) === -1) {
 			$("#albumChoice option[value='" + currAlbum + "']").remove();
@@ -233,8 +217,8 @@ let View = {
 	 				filterArtist = $('#artistChoice').val(),
 	 				album = $('album')[index].innerHTML,
 	 				filterAlbum = $('#albumChoice').val(),
-	 				artistMatch = ((artist === filterArtist) || filterArtist === "--Show All--"),
-	 				albumMatch = ((album === filterAlbum) || filterAlbum === "--Show All--");
+	 				artistMatch = ((artist === filterArtist) || filterArtist === "-Show All-"),
+	 				albumMatch = ((album === filterAlbum) || filterAlbum === "-Show All-");
 
 	 		if (artistMatch && albumMatch){
 	 			$(item).removeClass('hidden');
@@ -244,13 +228,14 @@ let View = {
 	 	});
 	},
 	hideAllBut(target){
+		if (target.tagName !== "LI") return;
 		$('.list_anchor').each(function(index, item){
 			if (item === target) {
 				$(item).addClass('currentLink');
-				$("#" + $(item).attr('next')).removeClass('hidden');
+				$("#" + $(item).attr('data--next')).removeClass('hidden');
 			} else {
 				$(item).removeClass('currentLink');
-				$("#" + $(item).attr('next')).addClass('hidden');
+				$("#" + $(item).attr('data--next')).addClass('hidden');
 			}
 		});
 	}
