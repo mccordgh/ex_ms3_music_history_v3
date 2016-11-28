@@ -9,12 +9,14 @@ let View = {
 	},	
 	addMoreButton() {
 		$('<div/>', {
-	    id: 'moreDiv'
+	    id: 'moreDiv',
+	    class: 'col-md-12'
 		}).appendTo('#content_playlist');
 
 		$('<button/>', {
 	    type: 'button',
 	    id: 'btnMore',
+	    class: 'btnSimple',
 	    html: 'More Music >>>>'
 		}).appendTo('#moreDiv');
 	},
@@ -36,18 +38,16 @@ let View = {
 		    value: item.album
 			}).appendTo('#albumChoice');
 
-			let song = "<h1>" + item.song + "</h1>";
-			let newUL = "<ul>";
-			let artist = "<li><artist>" + item.artist + "</artist></li>";
-			let pipeLI = "<li><b>|</b></li>";
-			let album = "<li><album>" + item.album + "</album></li>";
-			let genre = "<li><genre>Genre: " + item.genre + "<genre></li>";
-			let delButton = "<li><button type='button' id='" + index + "' class='btnDelete'>Delete</button></li>";
+			let song = `<div class='col-md-4'>${item.song}</div>`;
+			let artist = `<div class='col-md-4'><artist>${item.artist}</artist></div>`;
+			let album = `<div class='col-md-3'><album>${item.album}</album></div>`;
+			// let genre = "<li><genre>Genre: " + item.genre + "<genre></li>";
+			let delButton = "<button type='button' id='" + index + "' class='btnDelete btnSimple pull-right'>X</button>";
 
 			$('<div/>', {
 		    id: 'ulDiv' + index,
-		    class: 'songDiv',
-		    html: "<p>" + song + newUL + artist + pipeLI + album + pipeLI + genre + delButton + "</ul></p><hr>"
+		    class: 'songDiv col-md-12',
+		    html: song + artist + album + delButton
 			}).appendTo('#content_playlist');
 		});
 
@@ -87,8 +87,8 @@ let View = {
 	 				filterArtist = $('#artistChoice').val(),
 	 				album = $('album')[index].innerHTML,
 	 				filterAlbum = $('#albumChoice').val(),
-	 				artistMatch = ((artist === filterArtist) || filterArtist === "--Show All--"),
-	 				albumMatch = ((album === filterAlbum) || filterAlbum === "--Show All--");
+	 				artistMatch = ((artist === filterArtist) || filterArtist === "-Show All-"),
+	 				albumMatch = ((album === filterAlbum) || filterAlbum === "-Show All-");
 
 	 		if (artistMatch && albumMatch){
 	 			$(item).removeClass('hidden');
@@ -98,13 +98,14 @@ let View = {
 	 	});
 	},
 	hideAllBut(target){
+		if (target.tagName !== "LI") return;
 		$('.list_anchor').each(function(index, item){
 			if (item === target) {
 				$(item).addClass('currentLink');
-				$("#" + $(item).attr('next')).removeClass('hidden');
+				$("#" + $(item).attr('data--next')).removeClass('hidden');
 			} else {
 				$(item).removeClass('currentLink');
-				$("#" + $(item).attr('next')).addClass('hidden');
+				$("#" + $(item).attr('data--next')).addClass('hidden');
 			}
 		});
 	}

@@ -3,38 +3,32 @@
     {
       "artist": "The Church",
       "album": "Starfish", 
-      "song": "Under the Milky Way",
-      "genre": "Acoustic"
+      "song": "Under the Milky Way"
     },
     { 
       "artist": "ZZ Top", 
       "album": "Eliminator", 
-      "song": "Legs", 
-      "genre": "Rock"
+      "song": "Legs"
     },
     { 
       "artist": "Supertramp", 
       "album": "Breakfast in America", 
-      "song": "The Logical Song", 
-      "genre": "Rock" 
+      "song": "The Logical Song"
     },
     {
       "artist": "The Church",
       "album": "Starfish", 
-      "song": "Reptile",
-      "genre": "Rock"
+      "song": "Reptile"
     },
     { 
       "artist": "Pink Floyd", 
       "album": "The Wall", 
-      "song": "Another Brick in the Wall", 
-      "genre": "Rock" 
+      "song": "Another Brick in the Wall" 
     },
     { 
       "artist": "ZZ Top", 
       "album": "Eliminator", 
-      "song": "Sharp Dressed Man", 
-      "genre": "Rock"
+      "song": "Sharp Dressed Man"
     }
   ]
 }

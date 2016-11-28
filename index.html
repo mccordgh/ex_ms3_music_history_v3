@@ -3,90 +3,76 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
   <title>Music History</title>
 </head>
 
 <body>
 
-	<div class="wrapper">
+<div class="container">
+	<div id="wrapper" class='col-md-12'>
 		
-			<div id="content_nav">
-				
-				<ul>
-					<li id="list_music_anchor" class="list_anchor currentLink" next="list_music_view">List Music</li>
-					<li id="add_music_anchor" class="list_anchor" next="add_music_view">Add Music</li>
-					<li id="add_music_anchor" class="list_anchor" next="profile_view">Profile</li>
-					<li id="add_music_anchor" class="list_anchor" next="settings_view">Settings</li>
-				</ul>
-			
-			</div>
-
-		<div id="add_music_view" class="hidden">
-				Song Name: <input type="text" id="txtSong">
-				Artist: <input type="text" id="txtArtist">
-				Album: <input type="text" id="txtAlbum">	
-				Genre: <input type="text" id="txtGenre">	
-			<button type="button" id="btnAdd" class="myButton" align="middle">Add Music</button>
+		<div id="content_nav" class="row col-md-12">
+			<ul>
+				<li id="list_music_anchor" class="list_anchor navButton currentLink" data--next="list_music_view">List Music</li>
+				<li id="add_music_anchor" class="list_anchor navButton" data--next="add_music_view">Add Music</li>
+				<li id="profile_anchor" class="list_anchor navButton" data--next="profile_view">Profile</li>
+				<li id="settings_anchor" class="list_anchor navButton" data--next="settings_view">Settings</li>
+			</ul>
 		</div>
+		
+		<!-- <div class="container"> -->
+			<div id="add_music_view" class="hidden col-md-12">
+				<div class='col-md-2 col-md-offset-5'>
+					Song Name: <input type="text" id="txtSong">
+					Artist: <input type="text" id="txtArtist">
+					Album: <input type="text" id="txtAlbum">	
+					<!-- Genre: <input type="text" id="txtGenre">	 -->
+					<button type="button" id="btnAdd" class="btnSimple col-md-12">Add Song to Playlist</button>
+				</div>
+			</div>
 
 		<div id="list_music_view">
-
-			
-			<div id="content_options">
-				<form>
-					<p>Song length:</p>
-						<input type="range" min="0" max="100" value="50">
+			<div id="content_options" class="col-md-3">
+				<h1>Filter by:</h1>
 					<p>Artist:</p>
-						<select name="artist-choice" class="choice_box" id="artistChoice" filterType="artist">
-							<option value="--Show All--" selected>All Artists</option>
-							<option disabled>-------------------------------------</option>
+						<select name="artist-choice" class="choice_box" id="artistChoice" data--filterType="artist">
+							<option value="-Show All-" selected>All Artists</option>
+							<option label=" " disabled></option>
 	 					</select>
 					<p>Album:</p>
-						<select name="album-choice" class="choice_box" id="albumChoice" filterType="album">
-							<option value="--Show All--" selected>All Albums</option>
-							<option disabled>-------------------------------------</option>
+						<select name="album-choice" class="choice_box" id="albumChoice" data--filterType="album">
+							<option value="-Show All-" selected>All Albums</option>
+							<option label=" " disabled></option>
 						</select>
-					<p id="genre_name">Genre:</p>
-						<table class="radio_options">
-							<tr>
-								<td><input type="radio" name="genre" value="genre"> Rock</td>
-								<td><input type="radio" name="genre" value="genre"> Classical</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="genre" value="genre"> Pop</td>
-								<td><input type="radio" name="genre" value="genre"> Jazz</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="genre" value="genre"> Blues</td>
-								<td><input type="radio" name="genre" value="genre"> Hip Hop</td>
-							</tr>
-						</table>
-					<p>						
-						<button type="button" id="filter_button" class="myButton" align="middle">Filter</button>
-					</p>
-				</form>
 			</div>
 			
-			<div id="content_playlist">
-
+			<div id="content_playlist" class="col-md-9">
+				<div id="playlistHeader" class="col-md-12">
+					<div class='col-md-4'>Song</div>
+					<div class='col-md-4'>Artist</div>
+					<div class='col-md-4'>Album</div>
+				</div>
 			</div>
 		
 		</div>
 	
-		<div id="profile_view" class="hidden">
-			<div style="border: 5px solid black;height:300px;width:300px">
-				<h1>PROFILE VIEW PLACE HOLDER</h1>
+			<div id="profile_view" class="hidden col-md-12">
+				<div class='col-md-2 col-md-offset-5'>
+					<h1>PROFILE PLACEHOLDER</h1>
+				</div>
 			</div>
-		</div>
-		
-		<div id="settings_view" class="hidden">
-			<div style="border: 5px solid black;height:300px;width:300px">
-				<h1>SETTINGS VIEW PLACE HOLDER</h1>
+
+			<div id="settings_view" class="hidden col-md-12">
+				<div class='col-md-2 col-md-offset-5'>
+					<h1>SETTINGS PLACEHOLDER</h1>
+				</div>
 			</div>
-		</div>
 
 	</div>
+</div>
 
 	<!-- <button type="button" style="height:100px;width:500px" id="songButton">GET SONGS ARRAY</button> -->
 	
