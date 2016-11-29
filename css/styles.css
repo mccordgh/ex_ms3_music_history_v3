@@ -100,9 +100,13 @@ input {
 .btnDelete {
   margin: 0; }
 
-#wrapper {
+#logo {
   box-shadow: 0 0 5px 5px #333;
   margin: 30px auto; }
+
+#wrapper {
+  box-shadow: 0 0 5px 5px #555;
+  margin: auto; }
 
 #playlistHeader {
   background-color: black;
